@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital clock</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="bg">
+        <div class="container">
+            <div class="clock">
+                <div id="display">
+                    <div id="time">
+                        <span id="hrs">00</span>
+                        <span>:</span>
+                        <span id="min">00</span>
+                        <span>:</span>
+                        <span id="sec">00</span>
+                    </div>
+                    <div id="date-month-year" class="hidden">
+                        <span id="date">00</span>
+                        <span>:</span>
+                        <span id="month">00</span>
+                        <span>:</span>
+                        <span id="year">00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        const timeDisplay = document.getElementById('time');
+        const dateMonthYearDisplay = document.getElementById('date-month-year');
+
+        function toggleDisplay() {
+            if (timeDisplay.style.display === 'block') {
+                timeDisplay.style.display = 'none';
+                dateMonthYearDisplay.style.display = 'block';
+            } else {
+                timeDisplay.style.display = 'block';
+                dateMonthYearDisplay.style.display = 'none';
+            }
+        }
+
+        setInterval(toggleDisplay, 2000); // Switch every 2 seconds
+
+        function updateClock() {
+            const currentTime = new Date();
+            const hrs = (currentTime.getHours() < 10 ? "0" : "") + currentTime.getHours();
+            const min = (currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
+            const sec = (currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds();
+            const date = currentTime.getDate();
+            const month = (currentTime.getMonth() + 1);
+            const year = currentTime.getFullYear();
+
+            document.getElementById('hrs').textContent = hrs;
+            document.getElementById('min').textContent = min;
+            document.getElementById('sec').textContent = sec;
+            document.getElementById('date').textContent = date;
+            document.getElementById('month').textContent = month;
+            document.getElementById('year').textContent = year;
+        }
+
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
